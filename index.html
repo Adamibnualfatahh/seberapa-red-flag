@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seberapa Red Flag Kamu? - Cek Tingkat Toxic Hubunganmu</title>
+    <meta name="description" content="Temukan seberapa 'red flag' kamu atau pasanganmu dengan kuis interaktif ini. Analisis perilaku dalam hubungan asmara dan dapatkan skor kecocokan yang sehat." />
+    <meta name="keywords" content="red flag, kuis hubungan, tes pasangan, toxic relationship, tes cinta, seberapa red flag, relationship advice, indonesia" />
+    <meta name="author" content="Seberapa Red Flag Team" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Seberapa Red Flag Kamu? - Cek Tingkat Toxic Hubunganmu" />
+    <meta property="og:description" content="Cek seberapa 'red flag' perilaku dalam hubunganmu. Ikuti kuisnya sekarang dan cari tahu hasilnya!" />
+    <meta property="og:image" content="/favicon.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:title" content="Seberapa Red Flag Kamu? - Cek Tingkat Toxic Hubunganmu" />
+    <meta property="twitter:description" content="Cek seberapa 'red flag' perilaku dalam hubunganmu. Ikuti kuisnya sekarang dan cari tahu hasilnya!" />
+    <meta property="twitter:image" content="/favicon.png" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#FF4B5C',
+              secondary: '#FFA07A',
+              background: '#FFF9F9',
+              textMain: '#333333',
+              textSub: '#666666',
+            },
+            fontFamily: {
+              sans: ['Poppins', 'sans-serif'],
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              scaleIn: {
+                '0%': { opacity: '0', transform: 'scale(0.9)' },
+                '100%': { opacity: '1', transform: 'scale(1)' },
+              },
+              wiggle: {
+                '0%, 100%': { transform: 'rotate(-3deg)' },
+                '50%': { transform: 'rotate(3deg)' },
+              }
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.5s ease-out',
+              'fade-in-up': 'fadeInUp 0.6s ease-out',
+              'scale-in': 'scaleIn 0.4s ease-out',
+              'wiggle': 'wiggle 1s ease-in-out infinite',
+            }
+          },
+        },
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "recharts": "https://esm.sh/recharts@^3.6.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-background text-textMain antialiased">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
