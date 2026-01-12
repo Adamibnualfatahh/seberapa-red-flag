@@ -1,8 +1,10 @@
 import React from 'react';
-import { QUESTIONS, QUESTIONS_PER_PAGE } from '../constants';
+import { QUESTIONS_PER_PAGE } from '../constants';
+import { Question } from '../types';
 import Button from './Button';
 
 interface QuizProps {
+  questions: Question[];
   answers: Record<number, number>;
   onAnswer: (questionId: number, score: number) => void;
   onNext: () => void;
@@ -11,21 +13,22 @@ interface QuizProps {
   totalPages: number;
 }
 
-const Quiz: React.FC<QuizProps> = ({ 
-  answers, 
-  onAnswer, 
-  onNext, 
-  onPrev, 
+const Quiz: React.FC<QuizProps> = ({
+  questions,
+  answers,
+  onAnswer,
+  onNext,
+  onPrev,
   currentPage,
   totalPages
 }) => {
   const startIndex = currentPage * QUESTIONS_PER_PAGE;
-  const currentQuestions = QUESTIONS.slice(startIndex, startIndex + QUESTIONS_PER_PAGE);
-  
+  const currentQuestions = questions.slice(startIndex, startIndex + QUESTIONS_PER_PAGE);
+
   const allCurrentAnswered = currentQuestions.every((q) => answers[q.id] !== undefined);
 
   // Progress percentage
-  const totalQuestions = QUESTIONS.length;
+  const totalQuestions = questions.length;
   const answeredCount = Object.keys(answers).length;
   const progress = Math.round((answeredCount / totalQuestions) * 100);
 
@@ -34,11 +37,10 @@ const Quiz: React.FC<QuizProps> = ({
     return (
       <button
         onClick={() => onAnswer(questionId, score)}
-        className={`flex-1 py-2 px-3 text-sm md:text-base rounded-lg border transition-all duration-200 ${
-          isSelected
+        className={`flex-1 py-2 px-3 text-sm md:text-base rounded-lg border transition-all duration-200 ${isSelected
             ? 'bg-primary text-white border-primary shadow-md ring-2 ring-primary/30'
             : 'bg-white text-textMain border-gray-200 hover:border-secondary hover:text-secondary'
-        }`}
+          }`}
       >
         {label}
       </button>
@@ -54,7 +56,7 @@ const Quiz: React.FC<QuizProps> = ({
           <span className="text-sm font-bold text-primary">{progress}% Selesai</span>
         </div>
         <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
-          <div 
+          <div
             className="h-full bg-primary transition-all duration-500 ease-out"
             style={{ width: `${progress}%` }}
           />
@@ -71,7 +73,7 @@ const Quiz: React.FC<QuizProps> = ({
               </span>
               <h3 className="text-lg font-medium mt-2 leading-relaxed">{q.text}</h3>
             </div>
-            
+
             <div className="flex flex-wrap gap-2 md:gap-4">
               {renderOption(q.id, 0, 'Tidak Pernah')}
               {renderOption(q.id, 1, 'Kadang')}
@@ -84,16 +86,16 @@ const Quiz: React.FC<QuizProps> = ({
 
       {/* Navigation */}
       <div className="flex justify-between pt-4 pb-12 gap-4">
-        <Button 
-          variant="outline" 
-          onClick={onPrev} 
+        <Button
+          variant="outline"
+          onClick={onPrev}
           disabled={currentPage === 0}
           className="flex-1"
         >
           Sebelumnya
         </Button>
-        <Button 
-          onClick={onNext} 
+        <Button
+          onClick={onNext}
           disabled={!allCurrentAnswered}
           className="flex-1"
         >

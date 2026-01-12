@@ -1,73 +1,83 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Seberapa Red Flag Kamu? - Cek Tingkat Toxic Hubunganmu</title>
-    <meta name="description" content="Temukan seberapa 'red flag' kamu atau pasanganmu dengan kuis interaktif ini. Analisis perilaku dalam hubungan asmara dan dapatkan skor kecocokan yang sehat." />
-    <meta name="keywords" content="red flag, kuis hubungan, tes pasangan, toxic relationship, tes cinta, seberapa red flag, relationship advice, indonesia" />
-    <meta name="author" content="Seberapa Red Flag Team" />
-    <meta name="robots" content="index, follow" />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Seberapa Red Flag Kamu? - Cek Tingkat Toxic Hubunganmu" />
-    <meta property="og:description" content="Cek seberapa 'red flag' perilaku dalam hubunganmu. Ikuti kuisnya sekarang dan cari tahu hasilnya!" />
-    <meta property="og:image" content="/favicon.png" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seberapa Red Flag Kamu? - Cek Tingkat Toxic Hubunganmu</title>
+  <meta name="description"
+    content="Temukan seberapa 'red flag' kamu atau pasanganmu dengan kuis interaktif ini. Analisis perilaku dalam hubungan asmara dan dapatkan skor kecocokan yang sehat." />
+  <meta name="keywords"
+    content="red flag, kuis hubungan, tes pasangan, toxic relationship, tes cinta, seberapa red flag, relationship advice, indonesia" />
+  <meta name="author" content="Seberapa Red Flag Team" />
+  <meta name="robots" content="index, follow" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary" />
-    <meta property="twitter:title" content="Seberapa Red Flag Kamu? - Cek Tingkat Toxic Hubunganmu" />
-    <meta property="twitter:description" content="Cek seberapa 'red flag' perilaku dalam hubunganmu. Ikuti kuisnya sekarang dan cari tahu hasilnya!" />
-    <meta property="twitter:image" content="/favicon.png" />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Seberapa Red Flag Kamu? - Cek Tingkat Toxic Hubunganmu" />
+  <meta property="og:description"
+    content="Cek seberapa 'red flag' perilaku dalam hubunganmu. Ikuti kuisnya sekarang dan cari tahu hasilnya!" />
+  <meta property="og:image" content="/favicon.png" />
 
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: '#FF4B5C',
-              secondary: '#FFA07A',
-              background: '#FFF9F9',
-              textMain: '#333333',
-              textSub: '#666666',
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary" />
+  <meta property="twitter:title" content="Seberapa Red Flag Kamu? - Cek Tingkat Toxic Hubunganmu" />
+  <meta property="twitter:description"
+    content="Cek seberapa 'red flag' perilaku dalam hubunganmu. Ikuti kuisnya sekarang dan cari tahu hasilnya!" />
+  <meta property="twitter:image" content="/favicon.png" />
+
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF4B5C',
+            secondary: '#FFA07A',
+            background: '#FFF9F9',
+            textMain: '#333333',
+            textSub: '#666666',
+          },
+          fontFamily: {
+            sans: ['Poppins', 'sans-serif'],
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
             },
-            fontFamily: {
-              sans: ['Poppins', 'sans-serif'],
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
             },
-            keyframes: {
-              fadeIn: {
-                '0%': { opacity: '0' },
-                '100%': { opacity: '1' },
-              },
-              fadeInUp: {
-                '0%': { opacity: '0', transform: 'translateY(20px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
-              },
-              scaleIn: {
-                '0%': { opacity: '0', transform: 'scale(0.9)' },
-                '100%': { opacity: '1', transform: 'scale(1)' },
-              },
-              wiggle: {
-                '0%, 100%': { transform: 'rotate(-3deg)' },
-                '50%': { transform: 'rotate(3deg)' },
-              }
+            scaleIn: {
+              '0%': { opacity: '0', transform: 'scale(0.9)' },
+              '100%': { opacity: '1', transform: 'scale(1)' },
             },
-            animation: {
-              'fade-in': 'fadeIn 0.5s ease-out',
-              'fade-in-up': 'fadeInUp 0.6s ease-out',
-              'scale-in': 'scaleIn 0.4s ease-out',
-              'wiggle': 'wiggle 1s ease-in-out infinite',
+            wiggle: {
+              '0%, 100%': { transform: 'rotate(-3deg)' },
+              '50%': { transform: 'rotate(3deg)' },
+            },
+            bounceSlow: {
+              '0%, 100%': { transform: 'translateY(-5%)', animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)' },
+              '50%': { transform: 'translateY(0)', animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)' },
             }
           },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-out',
+            'fade-in-up': 'fadeInUp 0.6s ease-out',
+            'scale-in': 'scaleIn 0.4s ease-out',
+            'wiggle': 'wiggle 1s ease-in-out infinite',
+            'bounce-slow': 'bounceSlow 3s infinite',
+          }
         },
-      }
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+      },
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script type="importmap">
 {
   "imports": {
@@ -79,10 +89,12 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/index.css">
 </head>
-  <body class="bg-background text-textMain antialiased">
-    <div id="root"></div>
+
+<body class="bg-background text-textMain antialiased">
+  <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>

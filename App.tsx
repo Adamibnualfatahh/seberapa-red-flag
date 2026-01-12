@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AppStep, UserData, QuizState, SavedData } from './types';
+import { AppStep, UserData, QuizState, SavedData, Gender, RelationshipStatus } from './types';
 import { QUESTIONS, QUESTIONS_PER_PAGE, LOCAL_STORAGE_KEY } from './constants';
 import Welcome from './components/Welcome';
 import UserDataForm from './components/UserDataForm';
@@ -13,6 +13,24 @@ function App() {
     answers: {},
     currentQuestionIndex: 0,
   });
+
+  // Filter questions based on user data
+  const filteredQuestions = React.useMemo(() => {
+    if (!userData.gender || !userData.status || !userData.age) return [];
+
+    return QUESTIONS.filter(q => {
+      // 1. Gender check
+      if (q.applicableGender && !q.applicableGender.includes(userData.gender as Gender)) return false;
+
+      // 2. Status check
+      if (q.applicableStatus && !q.applicableStatus.includes(userData.status as RelationshipStatus)) return false;
+
+      // 3. Age check
+      if (q.minAge && parseInt(userData.age) < q.minAge) return false;
+
+      return true;
+    });
+  }, [userData]);
 
   // Load from LocalStorage on mount
   useEffect(() => {
@@ -47,7 +65,7 @@ function App() {
       completed: isCompleted,
       timestamp: Date.now(),
     };
-    
+
     // Only save if we have started entering data
     if (step !== AppStep.WELCOME) {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataToSave));
@@ -70,7 +88,7 @@ function App() {
     }));
   };
 
-  const totalPages = Math.ceil(QUESTIONS.length / QUESTIONS_PER_PAGE);
+  const totalPages = Math.ceil(filteredQuestions.length / QUESTIONS_PER_PAGE);
   const currentPage = Math.floor(quizState.currentQuestionIndex / QUESTIONS_PER_PAGE);
 
   const handleNextPage = () => {
@@ -108,7 +126,15 @@ function App() {
   };
 
   const calculateTotalScore = () => {
-    return Object.values(quizState.answers).reduce((a: number, b: number) => a + b, 0);
+    // Calculate total score based on WEIGHT
+    return Object.entries(quizState.answers).reduce((total, [questionId, score]) => {
+      // Only include questions that are currently relevant (filtered)
+      const question = filteredQuestions.find(q => q.id === parseInt(questionId));
+      if (!question) return total;
+
+      // Multiply score by weight
+      return total + (score * (question.weight || 1));
+    }, 0);
   };
 
   return (
@@ -126,7 +152,8 @@ function App() {
 
         {step === AppStep.QUIZ && (
           <div className="animate-fade-in-up">
-            <Quiz 
+            <Quiz
+              questions={filteredQuestions}
               answers={quizState.answers}
               onAnswer={handleAnswer}
               onNext={handleNextPage}
@@ -139,18 +166,20 @@ function App() {
 
         {step === AppStep.RESULT && (
           <div className="animate-fade-in-up">
-            <Result 
-              score={calculateTotalScore()} 
-              userData={userData} 
-              onReset={handleReset} 
+            <Result
+              score={calculateTotalScore()}
+              userData={userData}
+              answers={quizState.answers}
+              questions={filteredQuestions}
+              onReset={handleReset}
             />
           </div>
         )}
       </main>
-      
+
       {/* Simple footer */}
       <footer className="text-center py-6 text-xs text-gray-400">
-        &copy; {new Date().getFullYear()} Seberapa Red Flag. <br/>Dibuat untuk hiburan semata.
+        &copy; {new Date().getFullYear()} Seberapa Red Flag. <br />Dibuat untuk hiburan semata.
       </footer>
     </div>
   );

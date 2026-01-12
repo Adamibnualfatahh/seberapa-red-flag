@@ -15,6 +15,7 @@ export enum RelationshipStatus {
   SINGLE = 'Single',
   DATING = 'Pacaran',
   EX_DATING = 'Pernah Pacaran',
+  MARRIED = 'Menikah',
 }
 
 export interface UserData {
@@ -27,6 +28,18 @@ export interface Question {
   id: number;
   text: string;
   category: string;
+  weight: number; // 1-3, heavy questions weigh more
+  applicableGender?: Gender[]; // If undefined, applicable to all
+  applicableStatus?: RelationshipStatus[]; // If undefined, applicable to all
+  minAge?: number;
+}
+
+export interface Solution {
+  category: string;
+  scoreRange: [number, number]; // e.g. [0, 1] (low risk), [2, 3] (high risk) - average score per category
+  title: string;
+  description: string;
+  advice: string[];
 }
 
 export interface QuizState {
